@@ -4,12 +4,30 @@
   padding: 0%;
 }
 
+.show-reports-button {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.show-reports-button:hover {
+  background-color: #0056b3;
+}
+
 
 .main-container{
 display: flex;
 justify-content: center;
 align-items: center;
-background-color: gray;
+background-color: rgb(220, 220, 220);
 height: 100vh;
 }
 
@@ -26,12 +44,29 @@ height: 100vh;
   /* justify-content: center; */
 }
 
+.comm-btn{
+  border: none;
+  height: 3rem;
+  width: 3rem;
+}
+
+.download{
+  border: none;
+  cursor: pointer;
+}
+
 .buttons{
-  position: relative;
-  border: 1px red solid;
+  position: fixed;
+  /* border: 1px red solid; */
   width: fit-content;
-  left: 75%;
-  bottom: 3%;
+  left: 62%;
+  /* bottom: 3%; */
+}
+
+.close{
+  border: none;
+  cursor: pointer;
+  margin-right: 1rem;
 }
 
 .reports-table {
@@ -50,11 +85,16 @@ height: 100vh;
   /* border: 1px solid #ccc; */
 }
 
+
 .pagination {
-  /* margin-top: 20px; */
-  position: relative;
-  top: 50%;
+  position: absolute;
+  bottom: 80px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
 }
+
 
 .time{
 font-size: 10px;
@@ -66,6 +106,7 @@ margin-top: 5px;
   margin: 0 4px;
   padding: 8px 16px;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .pagination button[disabled] {
@@ -74,4 +115,24 @@ margin-top: 5px;
 
 .pagination button:hover {
   background-color: #ddd; /* Hover color for pagination buttons */
+}
+
+@media (max-width: 768px) {
+  .reports-dialog {
+    width: 90%;
+    max-width: 90%;
+  }
+  .buttons{
+    top: 9%;
+    left: 50%;
+ 
+  }
+}
+
+@media (max-width: 576px) {
+  .reports-dialog {
+    width: 95%;
+    max-width: 95%;
+    margin: 20px auto;
+  }
 }

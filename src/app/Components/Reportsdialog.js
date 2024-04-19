@@ -2,6 +2,10 @@
 "use client";
 import { useEffect, useState } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 
 const ReportsDialog = ({ onClose }) => {
   const [reports, setReports] = useState([]);
@@ -47,8 +51,8 @@ const ReportsDialog = ({ onClose }) => {
       <div className="reports-dialog">
         <h2>Recently Generated Reports</h2>
         <div className='buttons'>
-          <button>icon</button>
-          <button onClick={onClose}>Close</button>
+          <button className='close'><FilterAltOutlinedIcon/></button>
+          <button className='close' onClick={onClose}><CloseOutlinedIcon/></button>
         </div>
         <table className="reports-table">
           <thead>
@@ -66,7 +70,7 @@ const ReportsDialog = ({ onClose }) => {
                   <div className='time'>{report.time}</div>
                 </td>
                 <td>{report.name}</td>
-                <td><button><DownloadIcon/></button></td>
+                <td><button className='download'><DownloadIcon/></button></td>
               </tr>
             ))}
           </tbody>
@@ -77,20 +81,21 @@ const ReportsDialog = ({ onClose }) => {
             <option value={5}>5 per page</option>
             <option value={10}>10 per page</option>
           </select>
-          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-            Previous
+          <button className='comm-btn' onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            <ArrowBackIosNewOutlinedIcon/>
           </button>
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
+            className='comm-btn'
               key={index}
               onClick={() => handlePageChange(index + 1)}
-              style={{ backgroundColor: currentPage === index + 1 ? 'orange' : '' }}
+              style={{ backgroundColor: currentPage === index + 1 ? 'red' : '' }}
             >
               {index + 1}
             </button>
           ))}
-          <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-            Next
+          <button className='comm-btn' onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            <ArrowForwardIosOutlinedIcon/>
           </button>
         </div>
       </div>

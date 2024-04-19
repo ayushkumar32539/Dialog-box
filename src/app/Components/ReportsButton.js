@@ -11,8 +11,8 @@ const ReportsButton = () => {
   };
 
   return (
-    <div>
-      {!showDialog && <button onClick={() => setShowDialog(true)}>Show Reports</button>}
+    <div className='report-button'>
+      {!showDialog && <button className='show-reports-button' onClick={() => setShowDialog(true)}>Show Reports</button>}
       {showDialog && <ReportsDialog onClose={handleDialogClose} />}
     </div>
   );
