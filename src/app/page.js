@@ -1,11 +1,13 @@
 // pages/index.js
 
-import ReportsDialog from '../app/Components/Reportsdialog';
+import ReportsButton from './Components/ReportsButton';
+import ReportsDialog from './Components/ReportsDialog';
 
 const Home = () => {
   return (
     <div>
-      <ReportsDialog />
+      <ReportsButton/>
+      {/* <ReportsDialog /> */}
     </div>
   );
 };

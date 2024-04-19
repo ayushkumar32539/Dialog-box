@@ -1,19 +1,16 @@
 // components/ReportsDialog.js
 "use client";
 import { useEffect, useState } from 'react';
+import DownloadIcon from '@mui/icons-material/Download';
 
-const ReportsDialog = () => {
+const ReportsDialog = ({ onClose }) => {
   const [reports, setReports] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(3); // Default number of rows per page
 
   useEffect(() => {
-    // Importing useState and useEffect dynamically to ensure they're executed only on the client-side
-    Promise.all([
-      import('react'),
-      import('react').then(({ useEffect }) => ({ useEffect })),
-      import('../data/dummyReports'),
-    ]).then(([{ useState }, { useEffect }, { default: dummyReports }]) => {
+    const fetchData = async () => {
+      const { default: dummyReports } = await import('../data/dummyReports');
       // Filter reports for the last 30 days
       const filteredReports = dummyReports.filter(report => {
         const reportDate = new Date(report.date);
@@ -22,7 +19,8 @@ const ReportsDialog = () => {
         return reportDate >= thirtyDaysAgo;
       });
       setReports(filteredReports);
-    });
+    };
+    fetchData();
   }, []);
 
   // Calculate total number of pages
@@ -46,52 +44,56 @@ const ReportsDialog = () => {
 
   return (
     <div className='main-container'>
-    <div className="reports-dialog">
-      <h2>Recently Generated Reports</h2>
-      <table className="reports-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Report Name</th>
-            <th>Download</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentReports.map(report => (
-            <tr key={report.id}>
-              <td>
-                 <div className='date'>{report.date}</div> 
-              <div className='time'>{report.time}</div></td>
-              <td>{report.name}
-              </td>
-              <td><button>Download</button></td>
+      <div className="reports-dialog">
+        <h2>Recently Generated Reports</h2>
+        <div className='buttons'>
+          <button>icon</button>
+          <button onClick={onClose}>Close</button>
+        </div>
+        <table className="reports-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Report Name</th>
+              <th>Download</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
-          <option value={3}>3 per page</option>
-          <option value={5}>5 per page</option>
-          <option value={10}>10 per page</option>
-        </select>
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
-        </button>
-        {Array.from({ length: totalPages }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            style={{ backgroundColor: currentPage === index + 1 ? 'orange' : '' }}
-          >
-            {index + 1}
+          </thead>
+          <tbody>
+            {currentReports.map(report => (
+              <tr key={report.id}>
+                <td>
+                  <div className='date'>{report.date}</div>
+                  <div className='time'>{report.time}</div>
+                </td>
+                <td>{report.name}</td>
+                <td><button><DownloadIcon/></button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="pagination">
+          <select value={rowsPerPage} onChange={handleRowsPerPageChange}>
+            <option value={3}>3 per page</option>
+            <option value={5}>5 per page</option>
+            <option value={10}>10 per page</option>
+          </select>
+          <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            Previous
           </button>
-        ))}
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next
-        </button>
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              style={{ backgroundColor: currentPage === index + 1 ? 'orange' : '' }}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
