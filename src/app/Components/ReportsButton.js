@@ -1,7 +1,7 @@
 // components/ReportsButton.js
 "use client";
 import { useState } from 'react';
-import ReportsDialog from './ReportsDialog.js';
+import ReportsDialog from './ReportsDialog';
 
 const ReportsButton = () => {
   const [showDialog, setShowDialog] = useState(false);

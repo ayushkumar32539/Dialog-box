@@ -1,5 +1,3 @@
-// data/dummyReports.js
-
 const dummyReports = [
     { id: 1, name: 'Report 1', date: '2024-04-10',time:'16:02 PM' },
     { id: 2, name: 'Report 2', date: '2024-04-15',time:'16:02 PM' },

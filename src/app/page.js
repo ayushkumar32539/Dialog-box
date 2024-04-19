@@ -1,5 +1,3 @@
-// pages/index.js
-
 import ReportsButton from './Components/ReportsButton';
 
 

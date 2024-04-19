@@ -1,4 +1,3 @@
-// components/ReportsDialog.js
 "use client";
 import { useEffect, useState } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -10,7 +9,7 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 const ReportsDialog = ({ onClose }) => {
   const [reports, setReports] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(3); // Default number of rows per page
+  const [rowsPerPage, setRowsPerPage] = useState(3); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +42,7 @@ const ReportsDialog = ({ onClose }) => {
   // Function to handle rows per page change
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(parseInt(event.target.value));
-    setCurrentPage(1); // Reset to first page when changing rows per page
+    setCurrentPage(1);
   };
 
   return (
